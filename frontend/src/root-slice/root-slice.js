@@ -43,9 +43,15 @@ export const rootSlice = createSlice({
       };
       state.popupVisible = true;
     },
+
+    closePopup: (state) => {
+      state.popupVisible = false;
+      state.popupInfo = initialState.popupInfo;
+    },
   },
 });
 
-export const { setParameter, setTimestampStart, setPopup } = rootSlice.actions;
+export const { setParameter, setTimestampStart, setPopup, closePopup } =
+  rootSlice.actions;
 
 export const rootReducer = rootSlice.reducer;
