@@ -7,7 +7,7 @@ import { getPopupInfo } from "../../root-slice/root-selectors";
 import { closePopup } from "../../root-slice/root-slice";
 import { StationPopup } from "../station-popup";
 
-export const MapPopup = ({ isVisible }) => {
+export const MapPopup = () => {
   const popupInfo = useSelector(getPopupInfo);
   const { lat, lon, layer, data } = popupInfo;
   const dispatch = useDispatch();

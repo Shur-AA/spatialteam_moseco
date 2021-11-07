@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import {
   getSelectedParameter,
   getTimeStampStart,
+  getOstankinoModePeriod,
 } from "../../root-slice/root-selectors";
 import { getDate, getNextTimestamp } from "../../utils/date";
 import { useMemo } from "react";
@@ -27,6 +28,25 @@ const getStationData = async (stationId) => {
     `/station/${stationId}/2020-12-31T00:00/2021-01-02T00:00`
   );
   return data;
+};
+
+const getStationPeriodData = async (stationId, tsStart, tsEnd) => {
+  const data = await axios.get(`/station/${stationId}/${tsStart}/${tsEnd}`);
+  return data;
+};
+
+export const useStationPeriodData = (stationId) => {
+  const period = useSelector(getOstankinoModePeriod);
+  const dataPeriod = period.split(",");
+
+  const tsStart = dataPeriod && dataPeriod.length && dataPeriod[0];
+  const tsEnd = dataPeriod && dataPeriod.length && dataPeriod[1];
+
+  return useQuery(
+    ["station-period-data", stationId, tsStart, tsEnd],
+    () => getStationPeriodData(stationId, tsStart, tsEnd),
+    { enabled: !!period }
+  );
 };
 
 export const useStationsCoords = () => {

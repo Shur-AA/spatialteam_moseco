@@ -1,8 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { startTimeStamp } from "../config/constants";
 
+export const BASE_MODE = "base";
+export const OSTANKINO_MODE = "ostankino";
+
 const initialState = {
   parameter: "",
+  mode: BASE_MODE,
   timestampStart: startTimeStamp,
   popupInfo: {
     layer: "",
@@ -11,6 +15,7 @@ const initialState = {
     data: null,
   },
   popupVisible: false,
+  ostankinoModePeriod: "",
 };
 
 export const rootSlice = createSlice({
@@ -48,10 +53,26 @@ export const rootSlice = createSlice({
       state.popupVisible = false;
       state.popupInfo = initialState.popupInfo;
     },
+
+    setMode: (state, action) => {
+      const { payload } = action;
+      state.mode = payload;
+    },
+
+    setOstankinoModePeriod: (state, action) => {
+      const { payload } = action;
+      state.ostankinoModePeriod = payload;
+    },
   },
 });
 
-export const { setParameter, setTimestampStart, setPopup, closePopup } =
-  rootSlice.actions;
+export const {
+  setParameter,
+  setTimestampStart,
+  setPopup,
+  closePopup,
+  setMode,
+  setOstankinoModePeriod,
+} = rootSlice.actions;
 
 export const rootReducer = rootSlice.reducer;
