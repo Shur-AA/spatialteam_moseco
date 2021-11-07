@@ -21,3 +21,10 @@ export const getPopupVisible = createSelector(
   getRootState,
   (state) => state.popupVisible
 );
+
+export const getOstankinoModePeriod = createSelector(
+  getRootState,
+  (state) => state.ostankinoModePeriod
+);
+
+export const getMode = createSelector(getRootState, (state) => state.mode);
